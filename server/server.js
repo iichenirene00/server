@@ -91,8 +91,11 @@ app.post("/api/v1/sign", encryption, (req, res) => {
 const chartSchema = new mongoose.Schema({
   fill: Boolean,
 });
+const chartSchema1 = new mongoose.Schema({
+  fill: Object,
+});
 const chartModel = mongoose.model("row1chart1", chartSchema);
-const chartModel1 = mongoose.model("row2chart1", chartSchema);
+const chartModel1 = mongoose.model("row2chart1", chartSchema1);
 
 app.get("/", (req, res) => {
   res.send("Hello from Express!");
@@ -109,10 +112,11 @@ app.get("/api/v1/row2", (req, res) => {
   chartModel1
     .find()
     .then((data) => {
+      console.log(data);
       res.send(data);
     })
     .catch((err) => res.json(err));
 });
-app.listen(process.env.PORT || "8080", () => {
-  console.log("server running on 8080");
+app.listen("8000", () => {
+  console.log("server running on 8000");
 });
